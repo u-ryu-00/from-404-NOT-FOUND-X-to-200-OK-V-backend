@@ -12,32 +12,37 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class F4T2Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(F4T2Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(F4T2Application.class, args);
+    }
 
-	@Bean
-	public WebSecurityCustomizer ignoringCustomizer() {
-		return (web) -> web.ignoring().requestMatchers("/**");
-	}
+    @Bean
+    public WebSecurityCustomizer ignoringCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/**");
+    }
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");
-			}
-		};
-	}
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("/*");
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		int saltLength = 16;
-		int hashLength = 32;
-		int parallelism = 2;
-		int memory = 65536;
-		int iterations = 10;
-		return new Argon2PasswordEncoder(saltLength, hashLength, parallelism, memory, iterations);
-	}
+                        .allowedHeaders("*");
+            }
+        };
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        int saltLength = 16;
+        int hashLength = 32;
+        int parallelism = 2;
+        int memory = 65536;
+        int iterations = 10;
+        return new Argon2PasswordEncoder(saltLength, hashLength, parallelism, memory, iterations);
+    }
 }
