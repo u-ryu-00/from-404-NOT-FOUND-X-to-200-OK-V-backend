@@ -32,7 +32,7 @@ public class AdminController {
                 registerProductDto.getDescription(),
                 registerProductDto.getImage(),
                 registerProductDto.getPrice(),
-                registerProductDto.getQuantity()
+                registerProductDto.getInventory()
         );
         return product.toRegisterProductResultDto();
     }

@@ -11,18 +11,18 @@ public class RegisterProductDto {
 
     private Long price;
 
-    private Integer quantity;
+    private Integer inventory;
 
     public RegisterProductDto() {
     }
 
-    public RegisterProductDto(Long productId, String name, String description, String image, Long price, Integer quantity) {
+    public RegisterProductDto(Long productId, String name, String description, String image, Long price, Integer inventory) {
         this.productId = productId;
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
-        this.quantity = quantity;
+        this.inventory = inventory;
     }
 
     public Long getProductId() {
@@ -45,7 +45,7 @@ public class RegisterProductDto {
         return price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getInventory() {
+        return inventory;
     }
 }

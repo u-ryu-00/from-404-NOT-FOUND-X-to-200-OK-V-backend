@@ -25,7 +25,7 @@ public class ProductService {
         Product product = productRepository.getById(id);
 
         product.update(updateProductDto.getName(), updateProductDto.getDescription(), updateProductDto.getImage(),
-                updateProductDto.getPrice(), updateProductDto.getQuantity());
+                updateProductDto.getPrice(), updateProductDto.getInventory());
 
         return productRepository.save(product).getProductId();
     }

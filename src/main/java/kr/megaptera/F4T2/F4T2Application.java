@@ -30,7 +30,6 @@ public class F4T2Application {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
-
                         .allowedHeaders("*");
             }
         };
