@@ -5,15 +5,15 @@ public class RegisterProductResultDto {
 
     private Long productId;
 
-    private Integer quantity;
+    private Integer inventory;
 
     public RegisterProductResultDto() {
     }
 
-    public RegisterProductResultDto(Long id, Long productId, Integer quantity) {
+    public RegisterProductResultDto(Long id, Long productId, Integer inventory) {
         this.id = id;
         this.productId = productId;
-        this.quantity = quantity;
+        this.inventory = inventory;
     }
 
     public Long getId() {
@@ -24,7 +24,7 @@ public class RegisterProductResultDto {
         return productId;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getInventory() {
+        return inventory;
     }
 }

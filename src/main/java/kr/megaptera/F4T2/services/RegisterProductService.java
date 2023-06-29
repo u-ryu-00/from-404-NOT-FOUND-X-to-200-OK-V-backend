@@ -14,8 +14,8 @@ public class RegisterProductService {
         this.productRepository = productRepository;
     }
 
-    public Product register(Long productId, String name, String description, String image, Long price, Integer quantity) {
-        Product product = new Product(productId, name, description, image, price, quantity);
+    public Product register(Long productId, String name, String description, String image, Long price, Integer inventory) {
+        Product product = new Product(productId, name, description, image, price, inventory);
 
         productRepository.save(product);
 

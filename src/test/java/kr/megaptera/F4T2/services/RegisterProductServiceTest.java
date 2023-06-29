@@ -31,7 +31,7 @@ class RegisterProductServiceTest {
         String description = "소음이 적은 레이저 기계식 키보드";
         String image = "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80";
         Long price = 49000L;
-        Integer quantity = 2;
+        Integer inventory = 2;
 
         Product product = new Product(
                 1L,
@@ -44,7 +44,7 @@ class RegisterProductServiceTest {
 
         given(productRepository.findByProductId(productId)).willReturn(Optional.of(product));
 
-        registerProductService.register(productId, name, description, image, price, quantity);
+        registerProductService.register(productId, name, description, image, price, inventory);
 
         verify(productRepository).save(any());
     }

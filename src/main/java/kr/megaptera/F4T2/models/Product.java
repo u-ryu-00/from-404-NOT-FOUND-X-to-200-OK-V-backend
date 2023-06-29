@@ -20,18 +20,18 @@ public class Product {
 
     private Long price;
 
-    private Integer quantity;
+    private Integer inventory;
 
     public Product() {
     }
 
-    public Product(Long productId, String name, String description, String image, Long price, Integer quantity) {
+    public Product(Long productId, String name, String description, String image, Long price, Integer inventory) {
         this.productId = productId;
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
-        this.quantity = quantity;
+        this.inventory = inventory;
     }
 
     public static Product fake() {
@@ -58,23 +58,23 @@ public class Product {
         return price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getInventory() {
+        return inventory;
     }
 
     public RegisterProductResultDto toRegisterProductResultDto() {
-        return new RegisterProductResultDto(null, productId, quantity);
+        return new RegisterProductResultDto(null, productId, inventory);
     }
 
     public ProductDto toDto() {
-        return new ProductDto(productId, name, description, image, price, quantity);
+        return new ProductDto(productId, name, description, image, price, inventory);
     }
 
-    public void update(String name, String description, String image, Long price, Integer quantity) {
+    public void update(String name, String description, String image, Long price, Integer inventory) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
-        this.quantity = quantity;
+        this.inventory = inventory;
     }
 }

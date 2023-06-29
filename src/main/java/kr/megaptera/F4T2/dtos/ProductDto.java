@@ -11,18 +11,18 @@ public class ProductDto {
 
     private Long price;
 
-    private Integer quantity;
+    private Integer inventory;
 
     public ProductDto() {
     }
 
-    public ProductDto(Long id, String name, String description, String image, Long price, Integer quantity) {
+    public ProductDto(Long id, String name, String description, String image, Long price, Integer inventory) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
-        this.quantity = quantity;
+        this.inventory = inventory;
     }
 
     public Long getId() {
@@ -45,7 +45,7 @@ public class ProductDto {
         return price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getInventory() {
+        return inventory;
     }
 }
