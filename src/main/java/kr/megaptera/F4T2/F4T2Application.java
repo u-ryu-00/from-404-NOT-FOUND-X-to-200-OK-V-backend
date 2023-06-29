@@ -3,6 +3,8 @@ package kr.megaptera.F4T2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,5 +45,10 @@ public class F4T2Application {
         int memory = 65536;
         int iterations = 10;
         return new Argon2PasswordEncoder(saltLength, hashLength, parallelism, memory, iterations);
+    }
+
+    @Bean
+    public Pageable pageable() {
+        return PageRequest.of(0, 8);
     }
 }

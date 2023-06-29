@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -28,14 +29,18 @@ public class ProductController {
     }
 
     @GetMapping
-    public ProductsDto list() {
+    public ProductsDto list(
+            @RequestParam(required = false, defaultValue = "1") Integer page
+    ) {
         List<ProductDto> productDtos =
-                productService.list()
+                productService.list(page)
                         .stream()
                         .map(product -> product.toDto())
                         .collect(Collectors.toList());
 
-        return new ProductsDto(productDtos);
+        int totalPages = productService.pages();
+
+        return new ProductsDto(productDtos, totalPages);
     }
 
     @PatchMapping("/{id}")
@@ -46,14 +51,14 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         productService.delete(id);
     }
 
     @GetMapping("/{id}")
     public ProductDto product(
             @PathVariable("id") Long id
-    ){
+    ) {
         Product product = productService.detail(id);
 
         return product.toDto();
