@@ -1,5 +1,8 @@
 package kr.megaptera.F4T2;
 
+import kr.megaptera.F4T2.utils.JwtUtil;
+import kr.megaptera.F4T2.interceptors.AuthenticationInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -9,10 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class F4T2Application {
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     public static void main(String[] args) {
         SpringApplication.run(F4T2Application.class, args);
@@ -24,7 +30,7 @@ public class F4T2Application {
     }
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    public WebMvcConfigurer webMvcConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
@@ -33,6 +39,15 @@ public class F4T2Application {
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
                         .allowedHeaders("*");
+            }
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**").allowedOrigins("*");
+//            }
+
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                registry.addInterceptor(authenticationInterceptor());
             }
         };
     }
@@ -50,5 +65,15 @@ public class F4T2Application {
     @Bean
     public Pageable pageable() {
         return PageRequest.of(0, 8);
+    }
+
+    @Bean
+    public AuthenticationInterceptor authenticationInterceptor() {
+        return new AuthenticationInterceptor(jwtUtil());
+    }
+
+    @Bean
+    public JwtUtil jwtUtil() {
+        return new JwtUtil(jwtSecret);
     }
 }
