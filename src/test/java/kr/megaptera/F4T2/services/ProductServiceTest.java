@@ -4,22 +4,28 @@ import kr.megaptera.F4T2.models.Product;
 import kr.megaptera.F4T2.repositories.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 class ProductServiceTest {
     ProductRepository productRepository;
     ProductService productService;
+    Pageable pageable;
 
     @BeforeEach
     void setUp() {
         productRepository = mock(ProductRepository.class);
+        pageable = PageRequest.of(0, 10);
 
-        productService = new ProductService(productRepository);
+        productService = new ProductService(productRepository, pageable);
     }
 
     @Test
@@ -27,10 +33,10 @@ class ProductServiceTest {
         Product product = mock(Product.class);
 
         given(productRepository
-                .findAll())
-                .willReturn(List.of(product));
+                .findAll(any(Pageable.class)))
+                .willReturn(new PageImpl<>(List.of(product)));
 
-        List<Product> products = productService.list();
+        List<Product> products = productService.list(1).getContent();
 
         assertThat(products).hasSize(1);
     }
