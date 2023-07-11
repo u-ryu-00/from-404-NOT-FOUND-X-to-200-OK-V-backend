@@ -77,4 +77,8 @@ public class Product {
         this.price = price;
         this.inventory = inventory;
     }
+
+    public void updateInventory(Integer inventory) {
+        this.inventory = inventory;
+    }
 }

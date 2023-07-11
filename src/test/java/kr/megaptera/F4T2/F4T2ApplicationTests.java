@@ -8,8 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class F4T2ApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }

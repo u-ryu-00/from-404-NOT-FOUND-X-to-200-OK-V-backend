@@ -28,4 +28,16 @@ class BackdoorControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/backdoor/delete-product"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void deleteCart() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/backdoor/delete-cart"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deleteOrderHistory() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/backdoor/delete-orderHistory"))
+                .andExpect(status().isOk());
+    }
 }

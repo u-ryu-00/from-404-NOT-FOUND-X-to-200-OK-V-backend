@@ -1,7 +1,7 @@
 package kr.megaptera.F4T2;
 
-import kr.megaptera.F4T2.utils.JwtUtil;
 import kr.megaptera.F4T2.interceptors.AuthenticationInterceptor;
+import kr.megaptera.F4T2.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

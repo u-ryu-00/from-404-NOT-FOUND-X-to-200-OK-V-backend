@@ -5,7 +5,6 @@ import kr.megaptera.F4T2.models.UserId;
 import kr.megaptera.F4T2.services.OrderService;
 import kr.megaptera.F4T2.services.PayService;
 import kr.megaptera.F4T2.utils.JwtUtil;
-import org.apache.catalina.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.time.LocalDateTime;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -84,5 +84,17 @@ class OrderControllerTest {
                                 "\"createdAt\":\"" + createdAtString + "\"" +
                                 "}"))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void product() throws Exception {
+        given(orderService.detail(any())).willReturn(Order.fake());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/orders/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                        containsString(
+                                "\"orderId\":1,\"productId\":\"1\",\"name\":\"소음이 적은 레이저 기계식 키보드\""
+                        )));
     }
 }

@@ -7,7 +7,6 @@ import kr.megaptera.F4T2.models.Account;
 import kr.megaptera.F4T2.models.UserId;
 import kr.megaptera.F4T2.services.LoginService;
 import kr.megaptera.F4T2.utils.JwtUtil;
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
