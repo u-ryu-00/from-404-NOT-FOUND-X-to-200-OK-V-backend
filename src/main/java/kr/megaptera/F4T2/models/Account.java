@@ -53,6 +53,13 @@ public class Account {
         this.amount = amount;
     }
 
+    public Account(Long id, String encodedPassword, String name, long amount) {
+        this.id = id;
+        this.encodedPassword = encodedPassword;
+        this.name = name;
+        this.amount = 500000L;
+    }
+
     public static Account fake(String userId) {
         return new Account(1L, new UserId(userId), "내이름", 500000L);
     }
@@ -105,5 +112,15 @@ public class Account {
 
     public AccountDto toDto() {
         return new AccountDto(userId.value(), name, amount);
+    }
+
+    public void add(Product product, Integer quantity) {
+        Long totalPrice = product.getPrice() * quantity;
+
+//        if (totalPrice > this.amount) {
+//            throw new LackOfAmount();
+//        }
+
+//        this.amount -= product.getPrice() * quantity;
     }
 }

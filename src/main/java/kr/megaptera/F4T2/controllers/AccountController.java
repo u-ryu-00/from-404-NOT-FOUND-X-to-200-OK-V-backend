@@ -1,9 +1,11 @@
 package kr.megaptera.F4T2.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.megaptera.F4T2.dtos.AccountCreatedDto;
 import kr.megaptera.F4T2.dtos.AccountDto;
 import kr.megaptera.F4T2.exceptions.AccountNotFound;
 import kr.megaptera.F4T2.models.Account;
+import kr.megaptera.F4T2.models.OauthToken;
 import kr.megaptera.F4T2.models.UserId;
 import kr.megaptera.F4T2.services.AccountService;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +44,16 @@ public class AccountController {
         Account account = accountService.create(accountDto);
 
         return account.toCreatedDto();
+    }
+
+    @GetMapping("auth")
+    public String getLogin(@RequestParam("code") String code) throws JsonProcessingException {
+
+        OauthToken oauthToken = accountService.getAccessToken(code);
+
+        String jwtToken = accountService.saveAccountAndGetToken(oauthToken.getAccess_token());
+
+        return jwtToken;
     }
 
     @ExceptionHandler(AccountNotFound.class)

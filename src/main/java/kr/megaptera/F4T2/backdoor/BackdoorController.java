@@ -102,4 +102,18 @@ public class BackdoorController {
 
         return "OK";
     }
+
+    @GetMapping("delete-cart")
+    public String deleteCart() {
+        jdbcTemplate.execute("DELETE FROM cart");
+
+        return "OK";
+    }
+
+    @GetMapping("delete-orderHistory")
+    public String deleteOrderHistory() {
+        jdbcTemplate.execute("DELETE FROM order_history");
+
+        return "OK";
+    }
 }

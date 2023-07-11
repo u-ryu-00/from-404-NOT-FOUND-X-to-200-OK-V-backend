@@ -1,6 +1,5 @@
 package kr.megaptera.F4T2.models;
 
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import kr.megaptera.F4T2.dtos.OrderDto;
 import kr.megaptera.F4T2.dtos.PayResultDto;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
