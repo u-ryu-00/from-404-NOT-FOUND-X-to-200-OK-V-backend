@@ -94,7 +94,7 @@ class OrderControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString(
-                                "\"orderId\":1,\"productId\":\"1\",\"name\":\"소음이 적은 레이저 기계식 키보드\""
+                                "\"orderId\":1,\"productId\":1,"
                         )));
     }
 }

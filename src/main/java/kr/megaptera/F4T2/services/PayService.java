@@ -56,8 +56,9 @@ public class PayService {
 
         product.updateInventory(inventory);
 
-        cart.updateInventory(inventory);
-
+        if (cart != null) {
+            cart.updateInventory(inventory);
+        }
         return order;
     }
 }
