@@ -40,10 +40,6 @@ public class F4T2Application {
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
                         .allowedHeaders("*");
             }
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**").allowedOrigins("*");
-//            }
 
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
