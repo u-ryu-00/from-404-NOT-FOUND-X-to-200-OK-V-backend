@@ -107,7 +107,15 @@ public class Account {
             throw new LackOfAmount();
         }
 
-        this.amount -= product.getPrice() * quantity;
+        Long totalAmount = 0L;
+
+        totalAmount += totalPrice;
+
+        System.out.println("totalAmount" + totalAmount);
+
+        this.amount -= totalAmount;
+
+        System.out.println("내 계정 잔액" + this.amount);
     }
 
     public AccountDto toDto() {

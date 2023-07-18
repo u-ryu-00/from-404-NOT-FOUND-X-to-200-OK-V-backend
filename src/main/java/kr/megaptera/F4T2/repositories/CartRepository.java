@@ -6,8 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface CartRepository extends JpaRepository<Cart, Long> {
     Page<Cart> findAllByUserId(UserId userId, Pageable pageable);
 
-    Cart findByProductId(Long productId);
+    List<Cart> findAllByProductId(Long productId);
 }
