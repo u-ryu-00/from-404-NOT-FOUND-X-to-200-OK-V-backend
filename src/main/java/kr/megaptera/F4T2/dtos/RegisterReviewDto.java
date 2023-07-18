@@ -13,16 +13,19 @@ public class RegisterReviewDto {
 
     private String content;
 
+    private String reviewImage;
+
     public RegisterReviewDto() {
     }
 
-    public RegisterReviewDto(Long reviewId, Long productId, String name, String title, Integer rating, String content) {
+    public RegisterReviewDto(Long reviewId, Long productId, String name, String title, Integer rating, String content, String reviewImage) {
         this.reviewId = reviewId;
         this.productId = productId;
         this.name = name;
         this.title = title;
         this.rating = rating;
         this.content = content;
+        this.reviewImage = reviewImage;
     }
 
     public Long getReviewId() {
@@ -47,6 +50,10 @@ public class RegisterReviewDto {
 
     public String getContent() {
         return content;
+    }
+
+    public String getReviewImage() {
+        return reviewImage;
     }
 }
 

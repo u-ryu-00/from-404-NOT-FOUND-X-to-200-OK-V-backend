@@ -15,10 +15,12 @@ public class ReviewDto {
 
     private String content;
 
+    private String reviewImage;
+
     public ReviewDto() {
     }
 
-    public ReviewDto(String userId, Long reviewId, Long productId, String name, String title, Integer rating, String content) {
+    public ReviewDto(String userId, Long reviewId, Long productId, String name, String title, Integer rating, String content, String reviewImage) {
         this.userId = userId;
         this.reviewId = reviewId;
         this.productId = productId;
@@ -26,6 +28,7 @@ public class ReviewDto {
         this.title = title;
         this.rating = rating;
         this.content = content;
+        this.reviewImage = reviewImage;
     }
 
     public String getUserId() {
@@ -54,5 +57,9 @@ public class ReviewDto {
 
     public String getContent() {
         return content;
+    }
+
+    public String getReviewImage() {
+        return reviewImage;
     }
 }

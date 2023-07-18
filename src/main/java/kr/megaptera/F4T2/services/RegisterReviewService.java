@@ -15,8 +15,8 @@ public class RegisterReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public Review register(UserId userId, Long productId, String name, String title, Integer rating, String content) {
-        Review review = new Review(userId, null, productId, name, title, rating, content);
+    public Review register(UserId userId, Long productId, String name, String title, Integer rating, String content, String reviewImage) {
+        Review review = new Review(userId, null, productId, name, title, rating, content, reviewImage);
 
         reviewRepository.save(review);
 

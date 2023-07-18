@@ -15,6 +15,7 @@ import kr.megaptera.F4T2.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -40,13 +41,20 @@ public class PayService {
         Product product = productRepository.findByProductId(productId)
                 .orElseThrow(() -> new ProductNotFound(productId));
 
-        Cart cart = cartRepository.findByProductId(productId);
 
         account.pay(product, quantity);
 
         Long totalPrice = product.getPrice() * quantity;
 
+        System.out.println("totalPrice : " + totalPrice);
+
         inventory -= quantity;
+
+//        List<Cart> cartsWithProduct = cartRepository.findAllByProductId(productId);
+
+//        for (Cart cart : cartsWithProduct) {
+//            cart.updateInventory(inventory);
+//        }
 
         Order order = new Order(null, userId, productId,
                 name, description, image, price, inventory, quantity, totalPrice,
@@ -56,9 +64,12 @@ public class PayService {
 
         product.updateInventory(inventory);
 
-        if (cart != null) {
-            cart.updateInventory(inventory);
-        }
+//        if (cartRepository.findByProductId(productId).isPresent()) {
+//            Cart cart = cartRepository.findByProductId(productId)
+//                    .orElseThrow(() -> new ProductNotFound(productId));
+//
+//            cart.updateInventory(inventory);
+//        }
         return order;
     }
 }

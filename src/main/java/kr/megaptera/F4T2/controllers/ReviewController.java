@@ -64,7 +64,8 @@ public class ReviewController {
                 registerReviewDto.getName(),
                 registerReviewDto.getTitle(),
                 registerReviewDto.getRating(),
-                registerReviewDto.getContent()
+                registerReviewDto.getContent(),
+                registerReviewDto.getReviewImage()
         );
         return review.toRegisterReviewResultdto();
     }
