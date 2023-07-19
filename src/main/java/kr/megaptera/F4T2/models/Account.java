@@ -111,11 +111,7 @@ public class Account {
 
         totalAmount += totalPrice;
 
-        System.out.println("totalAmount" + totalAmount);
-
         this.amount -= totalAmount;
-
-        System.out.println("내 계정 잔액" + this.amount);
     }
 
     public AccountDto toDto() {

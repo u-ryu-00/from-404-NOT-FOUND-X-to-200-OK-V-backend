@@ -4,8 +4,10 @@ import jakarta.validation.Valid;
 import kr.megaptera.F4T2.dtos.KakaoApproveResponseDto;
 import kr.megaptera.F4T2.dtos.KakaoReadyResponseDto;
 import kr.megaptera.F4T2.dtos.PayDto;
+import kr.megaptera.F4T2.models.Order;
 import kr.megaptera.F4T2.models.UserId;
 import kr.megaptera.F4T2.services.KakaoPayService;
+import kr.megaptera.F4T2.services.PayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("orders")
 public class KakaoPayController {
     private final KakaoPayService kakaoPayService;
+    private final PayService payService;
 
-    public KakaoPayController(KakaoPayService kakaoPayService) {
+    public KakaoPayController(KakaoPayService kakaoPayService, PayService payService) {
         this.kakaoPayService = kakaoPayService;
+        this.payService = payService;
     }
 
     // 결제 요청
@@ -31,15 +35,28 @@ public class KakaoPayController {
             @RequestAttribute("userId") UserId userId,
             @Valid @RequestBody PayDto payDto
     ) {
-        return kakaoPayService.kakaoPayReady();
+        Order order = payService.pay(
+                userId, payDto.getProductId(),
+                payDto.getName(),
+                payDto.getDescription(),
+                payDto.getImage(),
+                payDto.getPrice(),
+                payDto.getInventory(),
+                payDto.getQuantity(),
+                payDto.getReceiver(),
+                payDto.getAddress(),
+                payDto.getPhoneNumber(),
+                payDto.getDeliveryMessage(),
+                payDto.getCreatedAt()
+        );
+        return kakaoPayService.kakaoPayReady(userId, payDto);
     }
 
     // 결제 성공
-    @GetMapping("/success")
-    public ResponseEntity afterPayRequest(@RequestParam("pg_token") String pgToken) {
+    @GetMapping("success")
+    public ResponseEntity afterPayRequest(@RequestParam("pg_Token") String pgToken) {
         KakaoApproveResponseDto kakaoApprove = kakaoPayService.approveResponse(pgToken);
 
-        System.out.println("!!!!!!!!!!!!!");
         return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
     }
 

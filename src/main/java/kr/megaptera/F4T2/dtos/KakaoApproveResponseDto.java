@@ -8,7 +8,7 @@ public class KakaoApproveResponseDto {
     private String partner_order_id; // 가맹점 주문 번호
     private String partner_user_id; // 가맹점 회원 id
     private String payment_method_type; // 결제 수단
-    private Amount amount; // 결제 금액 정보
+    private AmountDto amount; // 결제 금액 정보
     private String item_name; // 상품명
     private String item_code; // 상품 코드
     private int quantity; // 상품 수량
@@ -19,7 +19,7 @@ public class KakaoApproveResponseDto {
     public KakaoApproveResponseDto() {
     }
 
-    public KakaoApproveResponseDto(String aid, String tid, String cid, String sid, String partner_order_id, String partner_user_id, String payment_method_type, Amount amount, String item_name, String item_code, int quantity, String created_at, String approved_at, String payload) {
+    public KakaoApproveResponseDto(String aid, String tid, String cid, String sid, String partner_order_id, String partner_user_id, String payment_method_type, AmountDto amount, String item_name, String item_code, int quantity, String created_at, String approved_at, String payload) {
         this.aid = aid;
         this.tid = tid;
         this.cid = cid;
@@ -64,7 +64,7 @@ public class KakaoApproveResponseDto {
         return payment_method_type;
     }
 
-    public Amount getAmount() {
+    public AmountDto getAmount() {
         return amount;
     }
 

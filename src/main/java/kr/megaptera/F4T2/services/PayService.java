@@ -46,9 +46,6 @@ public class PayService {
 
         Long totalPrice = product.getPrice() * quantity;
 
-        System.out.println("totalPrice : " + totalPrice);
-
-        inventory -= quantity;
 
 //        List<Cart> cartsWithProduct = cartRepository.findAllByProductId(productId);
 

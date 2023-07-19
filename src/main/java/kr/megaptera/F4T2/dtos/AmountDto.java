@@ -1,6 +1,6 @@
 package kr.megaptera.F4T2.dtos;
 
-public class Amount {
+public class AmountDto {
     private int total;
     private int tax_free;
     private int vat;
@@ -8,10 +8,10 @@ public class Amount {
     private int discount;
     private int green_deposit;
 
-    public Amount() {
+    public AmountDto() {
     }
 
-    public Amount(int total, int tax_free, int vat, int point, int discount, int green_deposit) {
+    public AmountDto(int total, int tax_free, int vat, int point, int discount, int green_deposit) {
         this.total = total;
         this.tax_free = tax_free;
         this.vat = vat;
