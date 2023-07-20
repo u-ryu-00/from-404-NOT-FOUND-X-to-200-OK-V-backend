@@ -69,7 +69,8 @@ public class OrderController {
                 payDto.getAddress(),
                 payDto.getPhoneNumber(),
                 payDto.getDeliveryMessage(),
-                payDto.getCreatedAt()
+                payDto.getCreatedAt(),
+                payDto.getTotalPrice()
         );
         return order.toPayResultDto();
     }

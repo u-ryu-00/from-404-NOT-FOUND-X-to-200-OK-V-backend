@@ -47,14 +47,15 @@ public class KakaoPayController {
                 payDto.getAddress(),
                 payDto.getPhoneNumber(),
                 payDto.getDeliveryMessage(),
-                payDto.getCreatedAt()
+                payDto.getCreatedAt(),
+                payDto.getTotalPrice()
         );
         return kakaoPayService.kakaoPayReady(userId, payDto);
     }
 
     // 결제 성공
     @GetMapping("success")
-    public ResponseEntity afterPayRequest(@RequestParam("pg_Token") String pgToken) {
+    public ResponseEntity afterPayRequest(@RequestParam("pgToken") String pgToken) {
         KakaoApproveResponseDto kakaoApprove = kakaoPayService.approveResponse(pgToken);
 
         return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
