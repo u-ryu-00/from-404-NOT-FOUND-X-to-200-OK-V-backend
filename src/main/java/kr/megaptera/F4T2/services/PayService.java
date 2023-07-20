@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,7 +34,7 @@ public class PayService {
     }
 
     public Order pay(UserId userId, Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity,
-                     String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt) {
+                     String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
 
         Account account = accountRepository.findByUserId(userId)
                 .orElseThrow(() -> new AccountNotFound(userId));
@@ -41,17 +42,11 @@ public class PayService {
         Product product = productRepository.findByProductId(productId)
                 .orElseThrow(() -> new ProductNotFound(productId));
 
+        Optional<Cart> cartOptional = cartRepository.findByProductId(productId);
 
         account.pay(product, quantity);
 
-        Long totalPrice = product.getPrice() * quantity;
-
-
-//        List<Cart> cartsWithProduct = cartRepository.findAllByProductId(productId);
-
-//        for (Cart cart : cartsWithProduct) {
-//            cart.updateInventory(inventory);
-//        }
+        inventory -= quantity;
 
         Order order = new Order(null, userId, productId,
                 name, description, image, price, inventory, quantity, totalPrice,
@@ -61,12 +56,11 @@ public class PayService {
 
         product.updateInventory(inventory);
 
-//        if (cartRepository.findByProductId(productId).isPresent()) {
-//            Cart cart = cartRepository.findByProductId(productId)
-//                    .orElseThrow(() -> new ProductNotFound(productId));
-//
-//            cart.updateInventory(inventory);
-//        }
+        if (cartOptional.isPresent()) {
+            Cart cart = cartOptional.get();
+            cart.updateInventory(inventory);
+            System.out.println("cart inventory update");
+        }
         return order;
     }
 }

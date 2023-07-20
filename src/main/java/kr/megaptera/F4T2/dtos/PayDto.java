@@ -32,10 +32,12 @@ public class PayDto {
 
     private LocalDateTime createdAt;
 
+    private Long totalPrice;
+
     public PayDto() {
     }
 
-    public PayDto(Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt) {
+    public PayDto(Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
         this.productId = productId;
         this.name = name;
         this.description = description;
@@ -48,6 +50,7 @@ public class PayDto {
         this.phoneNumber = phoneNumber;
         this.deliveryMessage = deliveryMessage;
         this.createdAt = createdAt;
+        this.totalPrice = totalPrice;
     }
 
     public Long getProductId() {
@@ -96,5 +99,9 @@ public class PayDto {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public Long getTotalPrice() {
+        return totalPrice;
     }
 }

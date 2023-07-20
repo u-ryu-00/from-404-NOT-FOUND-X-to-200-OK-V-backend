@@ -36,7 +36,7 @@ public class KakaoPayService {
         parameters.add("partner_user_id", "가맹점 회원 ID");
         parameters.add("item_name", payDto.getName());
         parameters.add("quantity", String.valueOf(payDto.getQuantity()));
-        parameters.add("total_amount", String.valueOf(payDto.getPrice() * payDto.getQuantity()));
+        parameters.add("total_amount", String.valueOf(payDto.getTotalPrice()));
         parameters.add("tax_free_amount", "0");
         parameters.add("approval_url", "http://localhost:8080/orders"); // 성공 시 redirect url
         parameters.add("cancel_url", "http://localhost:8080/orders/cancel"); // 취소 시 redirect url
