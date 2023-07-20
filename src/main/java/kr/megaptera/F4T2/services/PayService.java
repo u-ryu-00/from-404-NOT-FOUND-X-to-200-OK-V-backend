@@ -34,7 +34,7 @@ public class PayService {
     }
 
     public Order pay(UserId userId, Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity,
-                     String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
+                     String receiver, String address, String zoneCode, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
 
         Account account = accountRepository.findByUserId(userId)
                 .orElseThrow(() -> new AccountNotFound(userId));
@@ -50,7 +50,7 @@ public class PayService {
 
         Order order = new Order(null, userId, productId,
                 name, description, image, price, inventory, quantity, totalPrice,
-                receiver, address, phoneNumber, deliveryMessage, createdAt);
+                receiver, address, zoneCode, phoneNumber, deliveryMessage, createdAt);
 
         orderRepository.save(order);
 

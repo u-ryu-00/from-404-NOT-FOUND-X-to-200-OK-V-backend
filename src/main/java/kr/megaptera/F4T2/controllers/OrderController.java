@@ -67,6 +67,7 @@ public class OrderController {
                 payDto.getQuantity(),
                 payDto.getReceiver(),
                 payDto.getAddress(),
+                payDto.getZonecode(),
                 payDto.getPhoneNumber(),
                 payDto.getDeliveryMessage(),
                 payDto.getCreatedAt(),

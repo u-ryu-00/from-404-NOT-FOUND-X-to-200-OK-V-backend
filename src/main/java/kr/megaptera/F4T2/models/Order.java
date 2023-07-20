@@ -41,6 +41,8 @@ public class Order {
 
     private String address;
 
+    private String zonecode;
+
     private String phoneNumber;
 
     private String deliveryMessage;
@@ -51,7 +53,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long orderId, UserId userId, Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, Long totalPrice, String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt) {
+    public Order(Long orderId, UserId userId, Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, Long totalPrice, String receiver, String address, String zonecode, String phoneNumber, String deliveryMessage, LocalDateTime createdAt) {
         this.orderId = orderId;
         this.userId = userId;
         this.productId = productId;
@@ -64,6 +66,7 @@ public class Order {
         this.totalPrice = totalPrice;
         this.receiver = receiver;
         this.address = address;
+        this.zonecode = zonecode;
         this.phoneNumber = phoneNumber;
         this.deliveryMessage = deliveryMessage;
         this.createdAt = createdAt;
@@ -71,7 +74,7 @@ public class Order {
 
     public static Order fake() {
         LocalDateTime createdAt = LocalDateTime.now();
-        return new Order(1L, new UserId("a111"), 1L, "소음이 적은 레이저 기계식 키보드", "저소음 적축 레이저 기계식 키보드입니다.", "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80", 49000L, 2, 1, 49000L, "받는 사람", "주소", "010-1234-5678", "배송메시지", createdAt);
+        return new Order(1L, new UserId("a111"), 1L, "소음이 적은 레이저 기계식 키보드", "저소음 적축 레이저 기계식 키보드입니다.", "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80", 49000L, 2, 1, 49000L, "받는 사람", "주소", "우편번호", "010-1234-5678", "배송메시지", createdAt);
     }
 
     public Long getOrderId() {
@@ -122,6 +125,10 @@ public class Order {
         return address;
     }
 
+    public String getZonecode() {
+        return zonecode;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -139,6 +146,6 @@ public class Order {
     }
 
     public OrderDto toDto() {
-        return new OrderDto(orderId, productId, name, description, image, price, inventory, quantity, totalPrice, receiver, address, phoneNumber, deliveryMessage, createdAt);
+        return new OrderDto(orderId, productId, name, description, image, price, inventory, quantity, totalPrice, receiver, address, zonecode, phoneNumber, deliveryMessage, createdAt);
     }
 }

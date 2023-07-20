@@ -45,6 +45,7 @@ public class KakaoPayController {
                 payDto.getQuantity(),
                 payDto.getReceiver(),
                 payDto.getAddress(),
+                payDto.getZonecode(),
                 payDto.getPhoneNumber(),
                 payDto.getDeliveryMessage(),
                 payDto.getCreatedAt(),
