@@ -26,6 +26,9 @@ public class PayDto {
     private String address;
 
     @NotBlank
+    private String zonecode;
+
+    @NotBlank
     private String phoneNumber;
 
     private String deliveryMessage;
@@ -37,7 +40,7 @@ public class PayDto {
     public PayDto() {
     }
 
-    public PayDto(Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
+    public PayDto(Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, String receiver, String address, String zonecode, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
         this.productId = productId;
         this.name = name;
         this.description = description;
@@ -47,6 +50,7 @@ public class PayDto {
         this.quantity = quantity;
         this.receiver = receiver;
         this.address = address;
+        this.zonecode = zonecode;
         this.phoneNumber = phoneNumber;
         this.deliveryMessage = deliveryMessage;
         this.createdAt = createdAt;
@@ -87,6 +91,10 @@ public class PayDto {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getZonecode() {
+        return zonecode;
     }
 
     public String getPhoneNumber() {

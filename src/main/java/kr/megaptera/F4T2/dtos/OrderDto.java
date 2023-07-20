@@ -25,6 +25,8 @@ public class OrderDto {
 
     private String address;
 
+    private String zonecode;
+
     private String phoneNumber;
 
     private String deliveryMessage;
@@ -34,7 +36,7 @@ public class OrderDto {
     public OrderDto() {
     }
 
-    public OrderDto(Long orderId, Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, Long totalPrice, String receiver, String address, String phoneNumber, String deliveryMessage, LocalDateTime createdAt) {
+    public OrderDto(Long orderId, Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, Long totalPrice, String receiver, String address, String zonecode, String phoneNumber, String deliveryMessage, LocalDateTime createdAt) {
         this.orderId = orderId;
         this.productId = productId;
         this.name = name;
@@ -46,6 +48,7 @@ public class OrderDto {
         this.totalPrice = totalPrice;
         this.receiver = receiver;
         this.address = address;
+        this.zonecode = zonecode;
         this.phoneNumber = phoneNumber;
         this.deliveryMessage = deliveryMessage;
         this.createdAt = createdAt;
@@ -93,6 +96,10 @@ public class OrderDto {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getZonecode() {
+        return zonecode;
     }
 
     public String getPhoneNumber() {
