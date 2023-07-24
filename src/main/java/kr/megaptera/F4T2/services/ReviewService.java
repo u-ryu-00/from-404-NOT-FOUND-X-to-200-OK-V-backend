@@ -22,7 +22,7 @@ public class ReviewService {
     }
 
     public Page<Review> list(int page) {
-        Pageable pageable = PageRequest.of(page - 1, 8);
+        Pageable pageable = PageRequest.of(page - 1, 6);
 
         return reviewRepository.findAll(pageable);
     }

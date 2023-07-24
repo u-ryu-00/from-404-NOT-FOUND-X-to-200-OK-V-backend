@@ -107,11 +107,11 @@ public class Account {
             throw new LackOfAmount();
         }
 
-        Long totalAmount = 0L;
-
-        totalAmount += totalPrice;
-
-        this.amount -= totalAmount;
+//        Long totalAmount = 0L;
+//
+//        totalAmount += totalPrice;
+//
+//        this.amount -= totalAmount;
     }
 
     public AccountDto toDto() {
