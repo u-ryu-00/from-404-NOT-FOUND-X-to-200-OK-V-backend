@@ -3,7 +3,18 @@ package kr.megaptera.F4T2.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.megaptera.F4T2.dtos.AccountCreatedDto;
 import kr.megaptera.F4T2.dtos.AccountDto;
+import kr.megaptera.F4T2.dtos.ErrorDto;
+import kr.megaptera.F4T2.dtos.InvalidNameLengthErrorDto;
+import kr.megaptera.F4T2.dtos.PasswordDoNotMatchErrorDto;
+import kr.megaptera.F4T2.dtos.UserIdAlreadyExistErrorDto;
+import kr.megaptera.F4T2.dtos.WrongPasswordFormatErrorDto;
+import kr.megaptera.F4T2.dtos.WrongUserIdFormatErrorDto;
 import kr.megaptera.F4T2.exceptions.AccountNotFound;
+import kr.megaptera.F4T2.exceptions.InvalidNameLength;
+import kr.megaptera.F4T2.exceptions.PasswordDoNotMatch;
+import kr.megaptera.F4T2.exceptions.UserIdAlreadyExist;
+import kr.megaptera.F4T2.exceptions.WrongPasswordFormat;
+import kr.megaptera.F4T2.exceptions.WrongUserIdFormat;
 import kr.megaptera.F4T2.models.Account;
 import kr.megaptera.F4T2.models.OauthToken;
 import kr.megaptera.F4T2.models.UserId;
@@ -60,5 +71,35 @@ public class AccountController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String accountNotFound() {
         return "Account not Found!";
+    }
+
+    @ExceptionHandler(InvalidNameLength.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto invalidNameLength() {
+        return new InvalidNameLengthErrorDto();
+    }
+
+    @ExceptionHandler(WrongUserIdFormat.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto wrongUserIdFormat() {
+        return new WrongUserIdFormatErrorDto();
+    }
+
+    @ExceptionHandler(WrongPasswordFormat.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto wrongPasswordFormat() {
+        return new WrongPasswordFormatErrorDto();
+    }
+
+    @ExceptionHandler(PasswordDoNotMatch.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto passwordDoNotMatch() {
+        return new PasswordDoNotMatchErrorDto();
+    }
+
+    @ExceptionHandler(UserIdAlreadyExist.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto userIdAlreadyExist() {
+        return new UserIdAlreadyExistErrorDto();
     }
 }

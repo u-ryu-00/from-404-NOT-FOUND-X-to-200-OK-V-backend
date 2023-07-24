@@ -5,6 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import kr.megaptera.F4T2.dtos.AccountDto;
 import kr.megaptera.F4T2.exceptions.AccountNotFound;
+import kr.megaptera.F4T2.exceptions.InvalidNameLength;
+import kr.megaptera.F4T2.exceptions.PasswordDoNotMatch;
+import kr.megaptera.F4T2.exceptions.UserIdAlreadyExist;
+import kr.megaptera.F4T2.exceptions.WrongPasswordFormat;
+import kr.megaptera.F4T2.exceptions.WrongUserIdFormat;
 import kr.megaptera.F4T2.models.Account;
 import kr.megaptera.F4T2.models.KakaoProfile;
 import kr.megaptera.F4T2.models.OauthToken;
@@ -21,6 +26,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -56,6 +63,30 @@ public class AccountService {
         UserId userId = new UserId(userIdString);
 
         Account account = new Account(userId, accountDto.getName(), accountDto.getAmount());
+
+        String nameRegex = "^[가-힣]{3,7}$";
+        if (!accountDto.getName().matches(nameRegex)) {
+            throw new InvalidNameLength();
+        }
+
+        String userIdRegex = "^[a-z0-9]{4,16}$";
+        if (!accountDto.getUserId().matches(userIdRegex)) {
+            throw new WrongUserIdFormat();
+        }
+
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
+        if (!accountDto.getPassword().matches(passwordRegex)) {
+            throw new WrongPasswordFormat();
+        }
+
+        if (!accountDto.getPassword().equals(accountDto.getConfirmPassword())) {
+            throw new PasswordDoNotMatch();
+        }
+
+        Optional<Account> existedAccount = accountRepository.findByUserId(userId);
+        existedAccount.ifPresent(account1 -> {
+            throw new UserIdAlreadyExist();
+        });
 
         account.changePassword(accountDto.getPassword(), passwordEncoder);
         account.changePassword(accountDto.getConfirmPassword(), passwordEncoder);

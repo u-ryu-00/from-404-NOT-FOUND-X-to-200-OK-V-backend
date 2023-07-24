@@ -21,7 +21,7 @@ public class OrderService {
     }
 
     public Page<Order> list(UserId userId, int page) {
-        Pageable pageable = PageRequest.of(page - 1, 8);
+        Pageable pageable = PageRequest.of(page - 1, 6);
         return orderRepository.findAllByUserId(userId, pageable);
     }
 

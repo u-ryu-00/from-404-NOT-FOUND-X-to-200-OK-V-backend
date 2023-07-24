@@ -15,7 +15,6 @@ import kr.megaptera.F4T2.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,7 +45,7 @@ public class PayService {
 
         account.pay(product, quantity);
 
-        inventory -= quantity;
+//        inventory -= quantity;
 
         Order order = new Order(null, userId, productId,
                 name, description, image, price, inventory, quantity, totalPrice,
@@ -59,7 +58,6 @@ public class PayService {
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
             cart.updateInventory(inventory);
-            System.out.println("cart inventory update");
         }
         return order;
     }
