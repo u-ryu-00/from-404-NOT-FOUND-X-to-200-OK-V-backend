@@ -45,7 +45,7 @@ public class PayService {
 
         account.pay(product, quantity);
 
-//        inventory -= quantity;
+        inventory -= quantity;
 
         Order order = new Order(null, userId, productId,
                 name, description, image, price, inventory, quantity, totalPrice,

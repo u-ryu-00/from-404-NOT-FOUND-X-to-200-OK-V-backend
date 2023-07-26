@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.BDDMockito.given;
@@ -40,8 +41,8 @@ class CartControllerTest {
 
         UserId userId = new UserId("a111");
 
-        given(cartService.list(userId, 1))
-                .willReturn(Page.empty());
+        given(cartService.list(userId))
+                .willReturn(List.of(Cart.fake()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/cart")
                         .header("Authorization", "Bearer " + token))

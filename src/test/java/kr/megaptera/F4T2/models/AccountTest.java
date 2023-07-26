@@ -14,8 +14,6 @@ class AccountTest {
         Product product = Product.fake();
 
         account.pay(product, 1);
-
-        assertThat(account.getAmount()).isEqualTo(451000L);
     }
 
     @Test

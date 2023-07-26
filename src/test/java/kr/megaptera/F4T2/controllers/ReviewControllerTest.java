@@ -50,7 +50,7 @@ class ReviewControllerTest {
     void register() throws Exception {
         String token = jwtUtil.encode(new UserId("a111"));
 
-        given(registerReviewService.register(new UserId("a111"), 1L, "소음이 적은 레이저 기계식 키보드", "만족!", 4, "알록달록해서 마음에 드네요."))
+        given(registerReviewService.register(new UserId("a111"), 1L, "소음이 적은 레이저 기계식 키보드", "만족!", 4, "알록달록해서 마음에 드네요.", "http://res.cloudinary.com/dk5ffebyd/image/upload/v1690262634/hft1nfyh8g6aqlj9tnwl.png"))
                 .willReturn(Review.fake());
 
         mockMvc.perform(MockMvcRequestBuilders.post("/reviews")
@@ -62,7 +62,8 @@ class ReviewControllerTest {
                                 "\"name\":\"소음이 적은 레이저 기계식 키보드\"," +
                                 "\"title\":\"만족!\"," +
                                 "\"rating\":4," +
-                                "\"content\":\"알록달록해서 마음에 드네요.\"" +
+                                "\"content\":\"알록달록해서 마음에 드네요.\"," +
+                                "\"reviewImage\":\"http://res.cloudinary.com/dk5ffebyd/image/upload/v1690262634/hft1nfyh8g6aqlj9tnwl.png\"" +
                                 "}"))
                 .andExpect(status().isCreated());
     }
