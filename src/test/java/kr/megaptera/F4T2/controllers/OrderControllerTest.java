@@ -59,7 +59,7 @@ class OrderControllerTest {
 
         LocalDateTime createdAt = LocalDateTime.now();
 
-        given(payService.pay(new UserId("a111"), 1L, "소음이 적은 레이저 기계식 키보드", "저소음 적축 레이저 기계식 키보드입니다.", "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80", 49000L, 2, 1, "받는 사람", "주소", "010-1234-5678", "배송메시지", createdAt))
+        given(payService.pay(new UserId("a111"), 1L, "소음이 적은 레이저 기계식 키보드", "저소음 적축 레이저 기계식 키보드입니다.", "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80", 49000L, 2, 1, "받는 사람", "주소", "12345", "010-1234-5678", "배송메시지", createdAt, 49000L))
                 .willReturn(Order.fake());
 
         String createdAtString = createdAt.toString();
@@ -69,6 +69,7 @@ class OrderControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" +
+                                "\"orderId\":\"1\"," +
                                 "\"userId\":\"a111\"," +
                                 "\"productId\":\"1\"," +
                                 "\"name\":\"소음이 적은 레이저 기계식 키보드\"," +
@@ -77,8 +78,10 @@ class OrderControllerTest {
                                 "\"price\":\"49000\"," +
                                 "\"inventory\":\"2\"," +
                                 "\"quantity\":\"1\"," +
+                                "\"totalPrice\":\"49000\"," +
                                 "\"receiver\":\"받는 사람\"," +
                                 "\"address\":\"주소\"," +
+                                "\"zonecode\":\"12345\"," +
                                 "\"phoneNumber\":\"010-1234-5678\"," +
                                 "\"deliveryMessage\":\"배송메시지\"," +
                                 "\"createdAt\":\"" + createdAtString + "\"" +

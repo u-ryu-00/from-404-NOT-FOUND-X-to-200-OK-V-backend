@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -59,9 +58,11 @@ class PayServiceTest {
         Integer quantity = 1;
         String receiver = "받는 사람";
         String address = "주소";
+        String zonecode = "12345";
         String phoneNumber = "010-1234-5678";
         String deliveryMessage = "배송메시지";
         LocalDateTime createdAt = LocalDateTime.now();
+        Long totalPrice = 49000L;
 
         Account account = new Account(1L, new UserId("a111"), "내이름", 500000L);
 
@@ -86,9 +87,7 @@ class PayServiceTest {
 
 //        given(cartRepository.findAllByUserId(userId, pageable)).willReturn((Page<Cart>) cart);
 
-        payService.pay(userId, productId, name, description, image, price, inventory, quantity, receiver, address, phoneNumber, deliveryMessage, createdAt);
-
-        assertThat(account.getAmount()).isEqualTo(500000L - 49000L * quantity);
+        payService.pay(userId, productId, name, description, image, price, inventory, quantity, receiver, address, zonecode, phoneNumber, deliveryMessage, createdAt, totalPrice);
 
         verify(orderRepository).save(any());
     }

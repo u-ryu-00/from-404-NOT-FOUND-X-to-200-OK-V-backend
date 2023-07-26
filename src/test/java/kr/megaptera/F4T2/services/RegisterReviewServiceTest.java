@@ -29,8 +29,9 @@ class RegisterReviewServiceTest {
         String title = "만족!";
         int rating = 4;
         String content = "알록달록해서 마음에 드네요.";
+        String reviewImage = "http://res.cloudinary.com/dk5ffebyd/image/upload/v1690262634/hft1nfyh8g6aqlj9tnwl.png";
 
-        registerReviewService.register(userId, productId, name, title, rating, content);
+        registerReviewService.register(userId, productId, name, title, rating, content, reviewImage);
 
         verify(reviewRepository).save(any());
     }
