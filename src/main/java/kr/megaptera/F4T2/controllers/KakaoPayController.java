@@ -4,8 +4,10 @@ import jakarta.validation.Valid;
 import kr.megaptera.F4T2.dtos.KakaoApproveResponseDto;
 import kr.megaptera.F4T2.dtos.KakaoReadyResponseDto;
 import kr.megaptera.F4T2.dtos.PayDto;
+import kr.megaptera.F4T2.dtos.ResponseDto;
 import kr.megaptera.F4T2.models.Order;
 import kr.megaptera.F4T2.models.UserId;
+import kr.megaptera.F4T2.repositories.OrderRepository;
 import kr.megaptera.F4T2.services.KakaoPayService;
 import kr.megaptera.F4T2.services.PayService;
 import org.springframework.http.HttpStatus;
@@ -23,10 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class KakaoPayController {
     private final KakaoPayService kakaoPayService;
     private final PayService payService;
+    private final OrderRepository orderRepository;
 
-    public KakaoPayController(KakaoPayService kakaoPayService, PayService payService) {
+    public KakaoPayController(KakaoPayService kakaoPayService, PayService payService, OrderRepository orderRepository) {
         this.kakaoPayService = kakaoPayService;
         this.payService = payService;
+        this.orderRepository = orderRepository;
     }
 
     // 결제 요청
@@ -35,22 +39,22 @@ public class KakaoPayController {
             @RequestAttribute("userId") UserId userId,
             @Valid @RequestBody PayDto payDto
     ) {
-        Order order = payService.pay(
-                userId, payDto.getProductId(),
-                payDto.getName(),
-                payDto.getDescription(),
-                payDto.getImage(),
-                payDto.getPrice(),
-                payDto.getInventory(),
-                payDto.getQuantity(),
-                payDto.getReceiver(),
-                payDto.getAddress(),
-                payDto.getZonecode(),
-                payDto.getPhoneNumber(),
-                payDto.getDeliveryMessage(),
-                payDto.getCreatedAt(),
-                payDto.getTotalPrice()
-        );
+//        payService.pay(
+//                userId, payDto.getProductId(),
+//                payDto.getName(),
+//                payDto.getDescription(),
+//                payDto.getImage(),
+//                payDto.getPrice(),
+//                payDto.getInventory(),
+//                payDto.getQuantity(),
+//                payDto.getReceiver(),
+//                payDto.getAddress(),
+//                payDto.getZonecode(),
+//                payDto.getPhoneNumber(),
+//                payDto.getDeliveryMessage(),
+//                payDto.getCreatedAt(),
+//                payDto.getTotalPrice()
+//        );
         return kakaoPayService.kakaoPayReady(userId, payDto);
     }
 
@@ -59,6 +63,17 @@ public class KakaoPayController {
     public ResponseEntity afterPayRequest(@RequestParam("pgToken") String pgToken) {
         KakaoApproveResponseDto kakaoApprove = kakaoPayService.approveResponse(pgToken);
 
+        System.out.println("!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + kakaoApprove.getItem_name());
+
+
         return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
+    }
+
+    // 결제 취소
+    @GetMapping("cancel")
+    public ResponseEntity<ResponseDto> cancel() {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        return new ResponseEntity<>(new ResponseDto("400", "fail"), HttpStatus.OK);
     }
 }

@@ -20,43 +20,43 @@ public class Account {
 
     private String encodedPassword;
 
-    private String name;
+    private String userName;
 
     private Long amount;
 
     public Account() {
     }
 
-    public Account(UserId userId, String name) {
+    public Account(UserId userId, String userName) {
         this.userId = userId;
-        this.name = name;
+        this.userName = userName;
     }
 
-    public Account(UserId userId, String name, Long amount) {
+    public Account(UserId userId, String userName, Long amount) {
         this.userId = userId;
-        this.name = name;
+        this.userName = userName;
         this.amount = 500000L;
     }
 
-    public Account(Long id, UserId userId, String name, Long amount) {
+    public Account(Long id, UserId userId, String userName, Long amount) {
         this.id = id;
         this.userId = userId;
-        this.name = name;
+        this.userName = userName;
         this.amount = amount;
     }
 
-    public Account(Long id, UserId userId, String encodedPassword, String name, Long amount) {
+    public Account(Long id, UserId userId, String encodedPassword, String userName, Long amount) {
         this.id = id;
         this.userId = userId;
         this.encodedPassword = encodedPassword;
-        this.name = name;
+        this.userName = userName;
         this.amount = amount;
     }
 
-    public Account(Long id, String encodedPassword, String name, long amount) {
+    public Account(Long id, String encodedPassword, String userName, long amount) {
         this.id = id;
         this.encodedPassword = encodedPassword;
-        this.name = name;
+        this.userName = userName;
         this.amount = 500000L;
     }
 
@@ -80,8 +80,8 @@ public class Account {
         return encodedPassword;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     public Long getAmount() {
@@ -97,7 +97,7 @@ public class Account {
     }
 
     public AccountCreatedDto toCreatedDto() {
-        return new AccountCreatedDto(id, name, amount, userId.value());
+        return new AccountCreatedDto(id, userName, amount, userId.value());
     }
 
     public void pay(Product product, Integer quantity) {
@@ -115,7 +115,7 @@ public class Account {
     }
 
     public AccountDto toDto() {
-        return new AccountDto(userId.value(), name, amount);
+        return new AccountDto(userId.value(), userName, amount);
     }
 
     public void add(Product product, Integer quantity) {

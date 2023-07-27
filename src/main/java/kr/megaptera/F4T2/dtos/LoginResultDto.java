@@ -3,13 +3,13 @@ package kr.megaptera.F4T2.dtos;
 public class LoginResultDto {
     private final String accessToken;
 
-    private final String name;
+    private final String userName;
 
     private final Long amount;
 
-    public LoginResultDto(String accessToken, String name, Long amount) {
+    public LoginResultDto(String accessToken, String userName, Long amount) {
         this.accessToken = accessToken;
-        this.name = name;
+        this.userName = userName;
         this.amount = amount;
     }
 
@@ -17,8 +17,8 @@ public class LoginResultDto {
         return accessToken;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     public Long getAmount() {

@@ -5,6 +5,7 @@ import kr.megaptera.F4T2.dtos.KakaoApproveResponseDto;
 import kr.megaptera.F4T2.dtos.KakaoReadyResponseDto;
 import kr.megaptera.F4T2.dtos.PayDto;
 import kr.megaptera.F4T2.models.KakaoReadyResponse;
+import kr.megaptera.F4T2.models.Order;
 import kr.megaptera.F4T2.models.Tid;
 import kr.megaptera.F4T2.models.UserId;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,23 @@ public class KakaoPayService {
     static final String cid = "TC0ONETIME"; // 가맹점 테스트 코드
     private KakaoReadyResponse kakaoReadyResponse;
     private Tid tid;
+    private PayDto payDto;
+
+    //    private MultiValueMap<String, String> createCommonParameters(PayDto payDto) {
+//        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+//        parameters.add("cid", cid);
+//        parameters.add("partner_order_id", "가맹점 주문번호");
+//        parameters.add("partner_user_id", "가맹점 회원 ID");
+//        parameters.add("item_name", payDto.getName());
+//        parameters.add("quantity", String.valueOf(payDto.getQuantity()));
+//        parameters.add("total_amount", String.valueOf(payDto.getTotalPrice()));
+//        parameters.add("tax_free_amount", "0");
+//        parameters.add("approval_url", "http://localhost:8080/orders"); // 성공 시 redirect url
+//        parameters.add("cancel_url", "http://localhost:8080/orders/cancel"); // 취소 시 redirect url
+//        parameters.add("fail_url", "http://localhost:8080/orders/fail"); // 실패 시 redirect url
+//        return parameters;
+//    }
+
 
     public KakaoPayService() {
     }
@@ -34,9 +52,23 @@ public class KakaoPayService {
         parameters.add("cid", cid);
         parameters.add("partner_order_id", "가맹점 주문번호");
         parameters.add("partner_user_id", "가맹점 회원 ID");
-        parameters.add("item_name", payDto.getName());
+        parameters.add("productId", String.valueOf(payDto.getProductId()));
+        parameters.add("name", payDto.getName());
+        parameters.add("description", payDto.getDescription());
+        parameters.add("image", payDto.getImage());
+        parameters.add("price", String.valueOf(payDto.getPrice()));
+        parameters.add("inventory", String.valueOf(payDto.getInventory()));
+        parameters.add("quantity", String.valueOf(payDto.getQuantity()));
+        parameters.add("receiver", payDto.getReceiver());
+        parameters.add("address", payDto.getAddress());
+        parameters.add("zonecode", payDto.getZonecode());
+        parameters.add("phoneNumber", payDto.getPhoneNumber());
+        parameters.add("deliveryMessage", payDto.getDeliveryMessage());
+        parameters.add("CratedAt", String.valueOf(payDto.getCreatedAt()));
+        parameters.add("totalPrice", String.valueOf(payDto.getTotalPrice()));
         parameters.add("quantity", String.valueOf(payDto.getQuantity()));
         parameters.add("total_amount", String.valueOf(payDto.getTotalPrice()));
+        parameters.add("item_name", payDto.getName());
         parameters.add("tax_free_amount", "0");
         parameters.add("approval_url", "http://localhost:8080/orders"); // 성공 시 redirect url
         parameters.add("cancel_url", "http://localhost:8080/orders/cancel"); // 취소 시 redirect url
@@ -96,5 +128,4 @@ public class KakaoPayService {
 
         return httpHeaders;
     }
-
 }
