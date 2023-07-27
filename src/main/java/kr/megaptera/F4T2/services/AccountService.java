@@ -62,10 +62,10 @@ public class AccountService {
 
         UserId userId = new UserId(userIdString);
 
-        Account account = new Account(userId, accountDto.getName(), accountDto.getAmount());
+        Account account = new Account(userId, accountDto.getUserName(), accountDto.getAmount());
 
         String nameRegex = "^[가-힣]{3,7}$";
-        if (!accountDto.getName().matches(nameRegex)) {
+        if (!accountDto.getUserName().matches(nameRegex)) {
             throw new InvalidNameLength();
         }
 
@@ -167,7 +167,7 @@ public class AccountService {
 
         UserId userId = new UserId(profile.getKakao_account().getEmail());
 
-        Account account = accountRepository.findByName(profile.getKakao_account().getProfile().getNickname());
+        Account account = accountRepository.findByUserName(profile.getKakao_account().getProfile().getNickname());
 
         if (account == null) {
             account = new Account(profile.getId(), userId, fakePassword,

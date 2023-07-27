@@ -15,11 +15,13 @@ public class KakaoApproveResponseDto {
     private String created_at; // 결제 요청 시간
     private String approved_at; // 결제 승인 시간
     private String payload; // 결제 승인 요청에 대해 저장 값, 요청 시 전달 내용/**/
+    private String productId;
+
 
     public KakaoApproveResponseDto() {
     }
 
-    public KakaoApproveResponseDto(String aid, String tid, String cid, String sid, String partner_order_id, String partner_user_id, String payment_method_type, AmountDto amount, String item_name, String item_code, int quantity, String created_at, String approved_at, String payload) {
+    public KakaoApproveResponseDto(String aid, String tid, String cid, String sid, String partner_order_id, String partner_user_id, String payment_method_type, AmountDto amount, String item_name, String item_code, int quantity, String created_at, String approved_at, String payload, String productId) {
         this.aid = aid;
         this.tid = tid;
         this.cid = cid;
@@ -34,6 +36,7 @@ public class KakaoApproveResponseDto {
         this.created_at = created_at;
         this.approved_at = approved_at;
         this.payload = payload;
+        this.productId = productId;
     }
 
     public String getAid() {
@@ -90,5 +93,9 @@ public class KakaoApproveResponseDto {
 
     public String getPayload() {
         return payload;
+    }
+
+    public String getProductId() {
+        return productId;
     }
 }
