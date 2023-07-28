@@ -40,23 +40,6 @@ public class PayDto {
     public PayDto() {
     }
 
-    public PayDto(Long productId, String name, String description, String image, Long price, Integer inventory, Integer quantity, String receiver, String address, String zonecode, String phoneNumber, String deliveryMessage, LocalDateTime createdAt, Long totalPrice) {
-        this.productId = productId;
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.price = price;
-        this.inventory = inventory;
-        this.quantity = quantity;
-        this.receiver = receiver;
-        this.address = address;
-        this.zonecode = zonecode;
-        this.phoneNumber = phoneNumber;
-        this.deliveryMessage = deliveryMessage;
-        this.createdAt = createdAt;
-        this.totalPrice = totalPrice;
-    }
-
     public Long getProductId() {
         return productId;
     }

@@ -85,8 +85,6 @@ class PayServiceTest {
                 .findAll(any(Pageable.class)))
                 .willReturn(new PageImpl<>(List.of(cart)));
 
-//        given(cartRepository.findAllByUserId(userId, pageable)).willReturn((Page<Cart>) cart);
-
         payService.pay(userId, productId, name, description, image, price, inventory, quantity, receiver, address, zonecode, phoneNumber, deliveryMessage, createdAt, totalPrice);
 
         verify(orderRepository).save(any());

@@ -106,12 +106,6 @@ public class Account {
         if (totalPrice > this.amount) {
             throw new LackOfAmount();
         }
-
-//        Long totalAmount = 0L;
-//
-//        totalAmount += totalPrice;
-//
-//        this.amount -= totalAmount;
     }
 
     public AccountDto toDto() {
@@ -120,11 +114,5 @@ public class Account {
 
     public void add(Product product, Integer quantity) {
         Long totalPrice = product.getPrice() * quantity;
-
-//        if (totalPrice > this.amount) {
-//            throw new LackOfAmount();
-//        }
-
-//        this.amount -= product.getPrice() * quantity;
     }
 }

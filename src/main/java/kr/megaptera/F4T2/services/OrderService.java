@@ -34,4 +34,9 @@ public class OrderService {
 
         return orderPage.getTotalPages();
     }
+
+    public void delete(Long id) {
+        Order order = orderRepository.getById(id);
+        orderRepository.delete(order);
+    }
 }

@@ -53,6 +53,4 @@ class SessionControllerTest {
                         containsString("\"amount\":")
                 ));
     }
-
-
 }

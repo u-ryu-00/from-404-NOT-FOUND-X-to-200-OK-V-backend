@@ -41,7 +41,6 @@ class RegisterProductServiceTest {
                 49000L,
                 2
         );
-
         given(productRepository.findByProductId(productId)).willReturn(Optional.of(product));
 
         registerProductService.register(productId, name, description, image, price, inventory);

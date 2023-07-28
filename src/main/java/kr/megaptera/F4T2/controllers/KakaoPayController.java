@@ -39,23 +39,24 @@ public class KakaoPayController {
             @RequestAttribute("userId") UserId userId,
             @Valid @RequestBody PayDto payDto
     ) {
-//        payService.pay(
-//                userId, payDto.getProductId(),
-//                payDto.getName(),
-//                payDto.getDescription(),
-//                payDto.getImage(),
-//                payDto.getPrice(),
-//                payDto.getInventory(),
-//                payDto.getQuantity(),
-//                payDto.getReceiver(),
-//                payDto.getAddress(),
-//                payDto.getZonecode(),
-//                payDto.getPhoneNumber(),
-//                payDto.getDeliveryMessage(),
-//                payDto.getCreatedAt(),
-//                payDto.getTotalPrice()
-//        );
-        return kakaoPayService.kakaoPayReady(userId, payDto);
+        Order order = payService.pay(
+                userId, payDto.getProductId(),
+                payDto.getName(),
+                payDto.getDescription(),
+                payDto.getImage(),
+                payDto.getPrice(),
+                payDto.getInventory(),
+                payDto.getQuantity(),
+                payDto.getReceiver(),
+                payDto.getAddress(),
+                payDto.getZonecode(),
+                payDto.getPhoneNumber(),
+                payDto.getDeliveryMessage(),
+                payDto.getCreatedAt(),
+                payDto.getTotalPrice()
+        );
+
+        return kakaoPayService.kakaoPayReady(userId, payDto, order);
     }
 
     // 결제 성공
@@ -63,16 +64,12 @@ public class KakaoPayController {
     public ResponseEntity afterPayRequest(@RequestParam("pgToken") String pgToken) {
         KakaoApproveResponseDto kakaoApprove = kakaoPayService.approveResponse(pgToken);
 
-        System.out.println("!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + kakaoApprove.getItem_name());
-
-
         return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
     }
 
     // 결제 취소
     @GetMapping("cancel")
     public ResponseEntity<ResponseDto> cancel() {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
         return new ResponseEntity<>(new ResponseDto("400", "fail"), HttpStatus.OK);
     }
