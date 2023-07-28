@@ -27,51 +27,22 @@ public class KakaoPayService {
     private Tid tid;
     private PayDto payDto;
 
-    //    private MultiValueMap<String, String> createCommonParameters(PayDto payDto) {
-//        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-//        parameters.add("cid", cid);
-//        parameters.add("partner_order_id", "가맹점 주문번호");
-//        parameters.add("partner_user_id", "가맹점 회원 ID");
-//        parameters.add("item_name", payDto.getName());
-//        parameters.add("quantity", String.valueOf(payDto.getQuantity()));
-//        parameters.add("total_amount", String.valueOf(payDto.getTotalPrice()));
-//        parameters.add("tax_free_amount", "0");
-//        parameters.add("approval_url", "http://localhost:8080/orders"); // 성공 시 redirect url
-//        parameters.add("cancel_url", "http://localhost:8080/orders/cancel"); // 취소 시 redirect url
-//        parameters.add("fail_url", "http://localhost:8080/orders/fail"); // 실패 시 redirect url
-//        return parameters;
-//    }
-
-
     public KakaoPayService() {
     }
 
-    public KakaoReadyResponseDto kakaoPayReady(UserId userId, PayDto payDto) {
+    public KakaoReadyResponseDto kakaoPayReady(UserId userId, PayDto payDto, Order order) {
         // 카카오 페이 요청 양식
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
         parameters.add("partner_order_id", "가맹점 주문번호");
         parameters.add("partner_user_id", "가맹점 회원 ID");
-        parameters.add("productId", String.valueOf(payDto.getProductId()));
-        parameters.add("name", payDto.getName());
-        parameters.add("description", payDto.getDescription());
-        parameters.add("image", payDto.getImage());
-        parameters.add("price", String.valueOf(payDto.getPrice()));
-        parameters.add("inventory", String.valueOf(payDto.getInventory()));
-        parameters.add("quantity", String.valueOf(payDto.getQuantity()));
-        parameters.add("receiver", payDto.getReceiver());
-        parameters.add("address", payDto.getAddress());
-        parameters.add("zonecode", payDto.getZonecode());
-        parameters.add("phoneNumber", payDto.getPhoneNumber());
-        parameters.add("deliveryMessage", payDto.getDeliveryMessage());
-        parameters.add("CratedAt", String.valueOf(payDto.getCreatedAt()));
-        parameters.add("totalPrice", String.valueOf(payDto.getTotalPrice()));
         parameters.add("quantity", String.valueOf(payDto.getQuantity()));
         parameters.add("total_amount", String.valueOf(payDto.getTotalPrice()));
         parameters.add("item_name", payDto.getName());
         parameters.add("tax_free_amount", "0");
-        parameters.add("approval_url", "http://localhost:8080/orders"); // 성공 시 redirect url
-        parameters.add("cancel_url", "http://localhost:8080/orders/cancel"); // 취소 시 redirect url
+        parameters.add("item_code", String.valueOf(payDto.getProductId()));
+        parameters.add("approval_url", "http://localhost:8080/complete"); // 성공 시 redirect url
+        parameters.add("cancel_url", "http://localhost:8080/orders/cancel?orderId=" + order.getOrderId()); // 취소 시 redirect URL에 orderId 추가
         parameters.add("fail_url", "http://localhost:8080/orders/fail"); // 실패 시 redirect url
 
         // 파라미터, 헤더

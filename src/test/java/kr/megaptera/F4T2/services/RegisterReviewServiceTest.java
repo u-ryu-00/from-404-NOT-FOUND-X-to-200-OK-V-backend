@@ -35,5 +35,4 @@ class RegisterReviewServiceTest {
 
         verify(reviewRepository).save(any());
     }
-
 }

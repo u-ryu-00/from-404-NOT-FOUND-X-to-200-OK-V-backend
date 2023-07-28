@@ -74,5 +74,4 @@ class AccountServiceTest {
 
         assertThat(account.getUserId()).isEqualTo(userId);
     }
-
 }

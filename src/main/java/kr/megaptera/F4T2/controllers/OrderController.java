@@ -10,6 +10,7 @@ import kr.megaptera.F4T2.models.UserId;
 import kr.megaptera.F4T2.services.OrderService;
 import kr.megaptera.F4T2.services.PayService;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,5 +84,10 @@ public class OrderController {
         Order order = orderService.detail(id);
 
         return order.toDto();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        orderService.delete(id);
     }
 }
