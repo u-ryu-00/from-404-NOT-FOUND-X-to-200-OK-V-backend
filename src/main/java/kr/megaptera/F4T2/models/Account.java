@@ -103,9 +103,9 @@ public class Account {
     public void pay(Product product, Integer quantity) {
         Long totalPrice = product.getPrice() * quantity;
 
-        if (totalPrice > this.amount) {
-            throw new LackOfAmount();
-        }
+//        if (totalPrice > this.amount) {
+//            throw new LackOfAmount();
+//        }
     }
 
     public AccountDto toDto() {
